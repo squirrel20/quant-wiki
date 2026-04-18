@@ -9,9 +9,9 @@ export function renderTree(
   expanded: ExpandedSet,
   onToggle: (chapterTitle: string, willExpand: boolean) => void,
   onLeafClick: (node: NavNode, evt: MouseEvent) => void,
-): Map<string, HTMLElement> {
+): Map<string, HTMLElement[]> {
   root.empty();
-  const leafByHref = new Map<string, HTMLElement>();
+  const leafByHref = new Map<string, HTMLElement[]>();
   const list = root.createDiv({ cls: 'qwn-tree' });
 
   for (const chapter of nodes) {
@@ -42,7 +42,7 @@ function renderChildren(
   parent: HTMLElement,
   nodes: NavNode[],
   depth: number,
-  leafByHref: Map<string, HTMLElement>,
+  leafByHref: Map<string, HTMLElement[]>,
   onLeafClick: (node: NavNode, evt: MouseEvent) => void,
 ) {
   for (const n of nodes) {
@@ -50,7 +50,9 @@ function renderChildren(
       const leaf = parent.createDiv({ cls: 'qwn-leaf', text: n.title });
       leaf.style.paddingLeft = `${12 + depth * 12}px`;
       leaf.addEventListener('click', (evt) => onLeafClick(n, evt));
-      leafByHref.set(n.href, leaf);
+      const existing = leafByHref.get(n.href);
+      if (existing) existing.push(leaf);
+      else leafByHref.set(n.href, [leaf]);
     } else {
       const group = parent.createDiv({ cls: 'qwn-group' });
       const gt = group.createDiv({ cls: 'qwn-group-title', text: n.title });

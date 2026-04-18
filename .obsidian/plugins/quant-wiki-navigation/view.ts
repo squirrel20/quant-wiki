@@ -8,7 +8,7 @@ const NAV_FILE = 'docs/navigation.md';
 
 export class NavigationView extends ItemView {
   private expanded: ExpandedSet = new Set();
-  private leafByHref: Map<string, HTMLElement> = new Map();
+  private leafByHref: Map<string, HTMLElement[]> = new Map();
   private debouncedRebuild = debounce(() => this.rebuild(), 300, true);
 
   constructor(leaf: WorkspaceLeaf) { super(leaf); }
@@ -24,6 +24,10 @@ export class NavigationView extends ItemView {
         if (file.path === NAV_FILE) this.debouncedRebuild();
       }),
     );
+    this.registerEvent(
+      this.app.workspace.on('file-open', (file) => this.highlightActive(file)),
+    );
+    this.highlightActive(this.app.workspace.getActiveFile());
   }
 
   async onClose() {}
@@ -56,6 +60,8 @@ export class NavigationView extends ItemView {
       (title, open) => { open ? this.expanded.add(title) : this.expanded.delete(title); },
       (node, evt) => this.handleLeafClick(node, evt),
     );
+
+    this.highlightActive(this.app.workspace.getActiveFile());
   }
 
   private handleLeafClick(node: NavNode, evt: MouseEvent) {
@@ -76,5 +82,37 @@ export class NavigationView extends ItemView {
 
     const linkText = toObsidianLinkText(node.href);
     this.app.workspace.openLinkText(linkText, '', newLeaf);
+  }
+
+  private highlightActive(file: TFile | null) {
+    const root = this.containerEl.children[1] as HTMLElement;
+    root.querySelectorAll('.qwn-leaf.is-active').forEach((el) => el.classList.remove('is-active'));
+    if (!file) return;
+
+    const relative = file.path.startsWith('docs/') ? file.path.slice('docs/'.length) : null;
+    if (!relative) return;
+
+    // Gather all leaf elements whose href (with optional #anchor) resolves to this file.
+    const matches: HTMLElement[] = [];
+    const exact = this.leafByHref.get(relative);
+    if (exact) matches.push(...exact);
+    for (const [href, els] of this.leafByHref) {
+      if (href === relative) continue;
+      if (href.split('#')[0] === relative) matches.push(...els);
+    }
+    if (matches.length === 0) return;
+
+    for (const el of matches) el.classList.add('is-active');
+
+    // Expand ancestor chapter of the FIRST match (avoid thrashing toggles for the footer row).
+    const first = matches[0];
+    const chapterBody = first.closest('.qwn-chapter-body') as HTMLElement | null;
+    if (chapterBody && chapterBody.style.display === 'none') {
+      const chapter = chapterBody.parentElement as HTMLElement | null;
+      const header = chapter?.querySelector('.qwn-chapter-header') as HTMLElement | null;
+      header?.click();
+    }
+
+    first.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
 }
