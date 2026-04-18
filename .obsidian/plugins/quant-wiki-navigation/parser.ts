@@ -1,7 +1,7 @@
 export type NavNode = {
   title: string;
   href?: string;
-  external?: boolean;
+  external: boolean;
   children: NavNode[];
 };
 
@@ -17,7 +17,7 @@ export function parse(md: string): NavNode[] {
 
     const ch = line.match(CHAPTER_RE);
     if (ch) {
-      current = { title: ch[1], children: [] };
+      current = { title: ch[1], external: false, children: [] };
       chapters.push(current);
       continue;
     }

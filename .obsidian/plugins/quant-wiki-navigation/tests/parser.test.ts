@@ -15,6 +15,7 @@ test('single chapter with one leaf', () => {
   assert.deepEqual(parse(md), [
     {
       title: '简介',
+      external: false,
       children: [
         { title: '关于项目', href: 'index.md', external: false, children: [] },
       ],
