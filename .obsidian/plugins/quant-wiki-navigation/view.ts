@@ -30,7 +30,9 @@ export class NavigationView extends ItemView {
     this.highlightActive(this.app.workspace.getActiveFile());
   }
 
-  async onClose() {}
+  async onClose() {
+    this.leafByHref.clear();
+  }
 
   private async rebuild() {
     const root = this.containerEl.children[1] as HTMLElement;
