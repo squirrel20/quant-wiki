@@ -11,6 +11,8 @@
     "importHelpers": true,
     "isolatedModules": true,
     "strictNullChecks": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "lib": ["DOM", "ES2022"]
   },
   "include": ["**/*.ts"],
