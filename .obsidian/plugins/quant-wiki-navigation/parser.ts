@@ -7,7 +7,7 @@ export type NavNode = {
 
 const CHAPTER_RE = /^##\s+(.+?)\s*$/;
 const GROUP_RE   = /^(\s*)-\s*\*\*(.+?)\*\*\s*$/;
-const LEAF_RE    = /^(\s*)-\s*\[([^\]]+)\]\(([^)]+)\)\s*$/;
+const LINK_GLOBAL_RE = /\[([^\]]+)\]\(([^)]+)\)/g;
 
 function mkLeaf(title: string, href: string): NavNode {
   return {
@@ -45,11 +45,14 @@ export function parse(md: string): NavNode[] {
       continue;
     }
 
-    const leaf = line.match(LEAF_RE);
-    if (leaf) {
-      const indent = leaf[1].length;
+    const links = [...line.matchAll(LINK_GLOBAL_RE)];
+    if (links.length >= 1 && /^\s*-\s/.test(line)) {
+      const indentMatch = line.match(/^(\s*)-/);
+      const indent = indentMatch ? indentMatch[1].length : 0;
       while (stack.length > 1 && stack[stack.length - 1].indent >= indent) stack.pop();
-      stack[stack.length - 1].node.children.push(mkLeaf(leaf[2], leaf[3]));
+      for (const m of links) {
+        stack[stack.length - 1].node.children.push(mkLeaf(m[1], m[2]));
+      }
       continue;
     }
   }
