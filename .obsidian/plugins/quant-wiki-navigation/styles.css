@@ -1,0 +1,56 @@
+.qwn-root {
+  padding: 4px 0;
+  user-select: none;
+}
+.qwn-placeholder {
+  padding: 12px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+}
+.qwn-tree {
+  display: flex;
+  flex-direction: column;
+}
+.qwn-chapter-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--nav-item-color);
+}
+.qwn-chapter-header:hover {
+  background: var(--background-modifier-hover);
+}
+.qwn-triangle {
+  display: inline-block;
+  width: 10px;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.qwn-group-title {
+  font-weight: 600;
+  color: var(--text-muted);
+  padding-top: 6px;
+  padding-bottom: 2px;
+  font-size: var(--font-ui-small);
+}
+.qwn-leaf {
+  padding: 4px 12px;
+  cursor: pointer;
+  color: var(--nav-item-color);
+  font-size: var(--font-ui-small);
+  line-height: 1.4;
+  border-radius: 4px;
+  margin: 0 4px;
+}
+.qwn-leaf:hover {
+  background: var(--background-modifier-hover);
+  color: var(--nav-item-color-hover);
+}
+.qwn-leaf.is-active {
+  color: var(--text-accent);
+  font-weight: 600;
+  background: var(--background-modifier-active-hover);
+}
