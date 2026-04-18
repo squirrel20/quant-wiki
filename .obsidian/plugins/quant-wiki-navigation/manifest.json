@@ -1,0 +1,9 @@
+{
+  "id": "quant-wiki-navigation",
+  "name": "Quant Wiki Chapter Navigation",
+  "version": "0.1.0",
+  "minAppVersion": "1.5.0",
+  "description": "Renders docs/navigation.md as a collapsible sidebar tree for this vault.",
+  "author": "quant-wiki",
+  "isDesktopOnly": false
+}
