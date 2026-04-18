@@ -1,0 +1,218 @@
+{
+  "main": {
+    "id": "c1094bdf1ae47428",
+    "type": "split",
+    "children": [
+      {
+        "id": "268766972e13e3bd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ed3013e000fe69fc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/start/quant_trader/如何打造\"好用\"的交易策略.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "如何打造\"好用\"的交易策略"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "60a71895d7470fc0",
+    "type": "split",
+    "children": [
+      {
+        "id": "23f2beb80be8602c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1abcabc9ed598b6a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "f9311f3f150290ce",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "eb4b2e702cda30f0",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          },
+          {
+            "id": "150865465a6220de",
+            "type": "leaf",
+            "state": {
+              "type": "quant-wiki-navigation",
+              "state": {},
+              "icon": "list-tree",
+              "title": "章节导航"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "cf3c19c9831fcc01",
+    "type": "split",
+    "children": [
+      {
+        "id": "af4bce6de7a58a7f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "82914e4204c27362",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "docs/start/quant_trader/如何打造\"好用\"的交易策略.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "如何打造\"好用\"的交易策略 的反向链接列表"
+            }
+          },
+          {
+            "id": "25806794f6df8fd8",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "docs/start/quant_trader/如何打造\"好用\"的交易策略.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "如何打造\"好用\"的交易策略 的出链列表"
+            }
+          },
+          {
+            "id": "d713c31d26c4686a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "83dfbbbcdfbcfdcf",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "ef17e6202b67714c",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "docs/start/quant_trader/如何打造\"好用\"的交易策略.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "如何打造\"好用\"的交易策略 的大纲"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false,
+      "quant-wiki-navigation:打开章节导航": false
+    }
+  },
+  "active": "ed3013e000fe69fc",
+  "lastOpenFiles": [
+    "docs/start/quant_trader/如何如何划分交易风格.md",
+    "docs/start/quant_trader/如何打造\"好用\"的交易策略.md",
+    "docs/start/quant_trader/long-short.md",
+    "docs/navigation.md",
+    "docs/start/quant_trader/为什么有些交易策略能带来盈利.md",
+    "plans/2026-04-18-obsidian-navigation-sidebar-plan.md",
+    "plans/2026-04-18-obsidian-navigation-sidebar-design.md",
+    "plans",
+    "未命名.base",
+    "未命名 1.canvas",
+    "未命名.canvas",
+    "README.md",
+    "docs/contribute.md",
+    "docs/about.md",
+    "docs/index.md",
+    "docs/llmquant_resources/overview.md"
+  ]
+}
