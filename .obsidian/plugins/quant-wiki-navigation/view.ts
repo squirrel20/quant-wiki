@@ -1,4 +1,4 @@
-import { ItemView, TFile, WorkspaceLeaf } from 'obsidian';
+import { ItemView, TFile, WorkspaceLeaf, debounce } from 'obsidian';
 import { NavNode, parse } from './parser';
 import { renderTree, ExpandedSet } from './render';
 import { toObsidianLinkText } from './links';
@@ -9,6 +9,7 @@ const NAV_FILE = 'docs/navigation.md';
 export class NavigationView extends ItemView {
   private expanded: ExpandedSet = new Set();
   private leafByHref: Map<string, HTMLElement> = new Map();
+  private debouncedRebuild = debounce(() => this.rebuild(), 300, true);
 
   constructor(leaf: WorkspaceLeaf) { super(leaf); }
 
@@ -18,6 +19,11 @@ export class NavigationView extends ItemView {
 
   async onOpen() {
     await this.rebuild();
+    this.registerEvent(
+      this.app.vault.on('modify', (file) => {
+        if (file.path === NAV_FILE) this.debouncedRebuild();
+      }),
+    );
   }
 
   async onClose() {}
