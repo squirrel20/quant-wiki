@@ -1,6 +1,7 @@
 import { ItemView, TFile, WorkspaceLeaf } from 'obsidian';
 import { NavNode, parse } from './parser';
 import { renderTree, ExpandedSet } from './render';
+import { toObsidianLinkText } from './links';
 
 export const VIEW_TYPE = 'quant-wiki-navigation';
 const NAV_FILE = 'docs/navigation.md';
@@ -51,8 +52,23 @@ export class NavigationView extends ItemView {
     );
   }
 
-  private handleLeafClick(node: NavNode, _evt: MouseEvent) {
-    // Wired in Task 8
-    console.log('[qwn] click', node);
+  private handleLeafClick(node: NavNode, evt: MouseEvent) {
+    if (!node.href) return;
+
+    if (node.external) {
+      window.open(node.href, '_blank');
+      return;
+    }
+
+    // Modifier → new leaf mode. Match Obsidian native:
+    //   Cmd/Ctrl → new tab
+    //   Shift     → new split
+    //   otherwise → current pane (false)
+    const newLeaf: 'tab' | 'split' | false =
+      (evt.metaKey || evt.ctrlKey) ? 'tab' :
+      evt.shiftKey ? 'split' : false;
+
+    const linkText = toObsidianLinkText(node.href);
+    this.app.workspace.openLinkText(linkText, '', newLeaf);
   }
 }
