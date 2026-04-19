@@ -1,10 +1,11 @@
-import { ItemView, TFile, WorkspaceLeaf, debounce } from 'obsidian';
+import { ItemView, Menu, Notice, TFile, WorkspaceLeaf, debounce } from 'obsidian';
 import { NavNode, parse } from './parser';
 import { renderTree, ExpandedSet } from './render';
 import { toObsidianLinkText } from './links';
 
 export const VIEW_TYPE = 'quant-wiki-navigation';
 const NAV_FILE = 'docs/navigation.md';
+const DOCS_PREFIX = 'docs/';
 
 export class NavigationView extends ItemView {
   private expanded: ExpandedSet = new Set();
@@ -61,9 +62,54 @@ export class NavigationView extends ItemView {
       this.expanded,
       (title, open) => { open ? this.expanded.add(title) : this.expanded.delete(title); },
       (node, evt) => this.handleLeafClick(node, evt),
+      (node, evt) => this.handleContextMenu(node, evt),
     );
 
     this.highlightActive(this.app.workspace.getActiveFile());
+  }
+
+  private handleContextMenu(node: NavNode, evt: MouseEvent) {
+    evt.preventDefault();
+    evt.stopPropagation();
+
+    const menu = new Menu();
+    menu.addItem((item) =>
+      item
+        .setTitle('复制文本')
+        .setIcon('clipboard-copy')
+        .onClick(() => this.copyToClipboard(node.title, '已复制文本')),
+    );
+
+    if (node.href) {
+      if (node.external) {
+        menu.addItem((item) =>
+          item
+            .setTitle('复制链接')
+            .setIcon('link')
+            .onClick(() => this.copyToClipboard(node.href!, '已复制链接')),
+        );
+      } else {
+        const projectPath = `${DOCS_PREFIX}${node.href}`;
+        menu.addItem((item) =>
+          item
+            .setTitle('复制相对路径')
+            .setIcon('file')
+            .onClick(() => this.copyToClipboard(projectPath, '已复制路径')),
+        );
+      }
+    }
+
+    menu.showAtMouseEvent(evt);
+  }
+
+  private async copyToClipboard(text: string, successMsg: string) {
+    try {
+      await navigator.clipboard.writeText(text);
+      new Notice(successMsg);
+    } catch (err) {
+      console.error('[qwn] clipboard write failed', err);
+      new Notice('复制失败');
+    }
   }
 
   private handleLeafClick(node: NavNode, evt: MouseEvent) {

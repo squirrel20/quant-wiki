@@ -12,6 +12,7 @@ jump between wiki pages while reading.
 - Active file is highlighted; its chapter auto-expands
 - Edits to `docs/navigation.md` live-reload the tree (debounced 300ms)
 - Handles duplicate hrefs (e.g. `index.md` appearing in both 简介 and 其他入口) by highlighting every occurrence
+- Right-click any item for context menu: 复制文本 (all items), plus 复制相对路径 (internal leaves, e.g. `docs/concepts/arbitrage.md`) or 复制链接 (external URLs)
 
 ## Install
 
@@ -42,3 +43,6 @@ Run through after any behavior change:
 - [ ] Ribbon icon opens/focuses the view
 - [ ] Command palette → "打开章节导航" → opens/focuses the view
 - [ ] Toggle dark/light theme → colors remain correct
+- [ ] Right-click a leaf → menu shows `复制文本` + `复制相对路径`; both copy to clipboard and show a Notice
+- [ ] Right-click a chapter header or group title → menu shows only `复制文本`; right-click does NOT toggle expand/collapse
+- [ ] Right-click an external link (GitHub 仓库) → menu shows `复制文本` + `复制链接` (URL)
